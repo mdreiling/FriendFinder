@@ -402,11 +402,11 @@
       });
 
     // Survey question validation
-    // $(".form-check").each(function() {
-    //       if ($(this).val() === "") {
-    //           validForm = false;
-    //       }
-    //   });
+    $(".form-check-input").each(function() {
+          if ($(this).val() === "") {
+              validForm = false;
+          }
+      });
 
       return validForm;
 
@@ -416,33 +416,31 @@
   $("#submit").on("click", function(event) {
     event.preventDefault();
 
-    // If all fields are filled
-    alert("Submit button clicked")
-    
+    // If all fields are filled    
     if (validate()) {
         
         var newUser = {
             name: $("#name").val().trim(),
             photo: $("#photo").val().trim(),
             responses: [
-                $("#questionOne").val(),
-                $("#questionTwo").val(),
-                $("#questionThree").val(),
-                $("#questionFour").val(),
-                $("#questionFive").val(),
-                $("#questionSix").val(),
-                $("#questionSeven").val(),
-                $("#questionEight").val(),
-                $("#questionNine").val(),
-                $("#questionTen").val()
+                $("input[name='inlineRadioOptions1']:checked").val(),
+                $("input[name='inlineRadioOptions2']:checked").val(),
+                $("input[name='inlineRadioOptions3']:checked").val(),
+                $("input[name='inlineRadioOptions4']:checked").val(),
+                $("input[name='inlineRadioOptions5']:checked").val(),
+                $("input[name='inlineRadioOptions6']:checked").val(),
+                $("input[name='inlineRadioOptions7']:checked").val(),
+                $("input[name='inlineRadioOptions8']:checked").val(),
+                $("input[name='inlineRadioOptions9']:checked").val(),
+                $("input[name='inlineRadioOptions10']:checked").val()
             ]
         };
 
-        alert(newUser.name + " has submitted their information. Their scores were: " + newUser.responses);
+        alert(newUser.name + " has submitted their information. Their responses were: " + newUser.responses);
 
         $.post("/api/friends", newUser, function() {
             alert("Your data has been submitted")
-        })
+        });
 
     } else {
         alert("Please fill the entire form before submitting.")
