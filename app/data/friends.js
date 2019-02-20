@@ -6,7 +6,7 @@ var friendsData = [
     {
         name: "John Doe",
         image: "image.jpg",
-        scores: [
+        responses: [
             1,
             1,
             1,
