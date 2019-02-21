@@ -20,7 +20,7 @@ module.exports = function(app) {
         friendsData.push(req.body);
 
         // Setting variables for comparison
-        let newCompare = req.body.responses;
+        let newCompare = req.body;
         let currentCompare = 0;
         let allCompare = [];
 
@@ -32,11 +32,13 @@ module.exports = function(app) {
 
             // For loop comparing survey responses between new user and currently selected user(determined by position in for loop)
             for(j = 0; j < 10; j++) {
-                currentCompare += (Math.abs(parseInt(friendsData[i].responses[j]) - parseInt(newCompare.response[j])));
+
+                currentCompare += (Math.abs(parseInt(friendsData[i].responses[j]) - parseInt(newCompare.responses[j])));
             };
 
             // Pushing current comparison value into array of all users.
             allCompare.push(currentCompare);
+            // console.log("Pushing compare")
             
         };
 

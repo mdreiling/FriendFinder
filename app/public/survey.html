@@ -7,10 +7,10 @@
 
     <!-- Bootstrap and JQuery -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>   
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -388,96 +388,82 @@
     </div>
   </div>
   
- <script type="text/javascript">
+  <script type="text/javascript">
   
-//   Form Validation Function - Checking to see that all fields are full
-  function initialValidate() {
-      var initValid = true;
-
-    // Name and image validation
-      $(".form-control").each(function() {
-          if ($(this).val() === "") {
-            initValid = false;
-          }
-      });
-
-    // Survey question validation
-    // $(".form-check-input").each(function() {
-    //       if ($(this).val() === "") {
-    //           validForm = false;
-    //       }
-    //   });
-
-      return initValid;
-
-  }
-
-//   function secondaryValidate() {
-    
-//     var secValid = true;
-    
-//     let responseBlanks = 0;
-//     for (i = 0; i < newUser.responses.length; i++) {
-//         if (newUser.responses[i] < 1) {
-//             responseBlanks++;
-//         }
-//     }
-
-//     if (responseBlanks > 0) {
-//         secValid = false
-//     }
-
-//     return secValid;
-//   }
-
-  $("#submit").on("click", function(event) {
-    event.preventDefault();
-
-    // If all fields are filled    
-    if (initialValidate()) {
+    //   Form Validation Function - Checking to see that all fields are full
+      function initialValidate() {
+          var initValid = true;
+        // Name and image validation
+          $(".form-control").each(function() {
+              if ($(this).val() === "") {
+                initValid = false;
+              }
+          });
+        // Survey question validation
+        // $(".form-check-input").each(function() {
+        //       if ($(this).val() === "") {
+        //           validForm = false;
+        //       }
+        //   });
+          return initValid;
+      }
+    //   function secondaryValidate() {
         
-        var newUser = {
-            name: $("#name").val().trim(),
-            photo: $("#photo").val().trim(),
-            responses: [
-                $("input[name='inlineRadioOptions1']:checked").val(),
-                $("input[name='inlineRadioOptions2']:checked").val(),
-                $("input[name='inlineRadioOptions3']:checked").val(),
-                $("input[name='inlineRadioOptions4']:checked").val(),
-                $("input[name='inlineRadioOptions5']:checked").val(),
-                $("input[name='inlineRadioOptions6']:checked").val(),
-                $("input[name='inlineRadioOptions7']:checked").val(),
-                $("input[name='inlineRadioOptions8']:checked").val(),
-                $("input[name='inlineRadioOptions9']:checked").val(),
-                $("input[name='inlineRadioOptions10']:checked").val()
-            ]
-        };
+    //     var secValid = true;
+        
+    //     let responseBlanks = 0;
+    //     for (i = 0; i < newUser.responses.length; i++) {
+    //         if (newUser.responses[i] < 1) {
+    //             responseBlanks++;
+    //         }
+    //     }
+    //     if (responseBlanks > 0) {
+    //         secValid = false
+    //     }
+    //     return secValid;
+    //   }
+      $("#submit").on("click", function(event) {
+        event.preventDefault();
+        // If all fields are filled    
+        if (initialValidate()) {
+            
+            var newUser = {
+                name: $("#name").val().trim(),
+                photo: $("#photo").val().trim(),
+                responses: [
+                    $("input[name='inlineRadioOptions1']:checked").val(),
+                    $("input[name='inlineRadioOptions2']:checked").val(),
+                    $("input[name='inlineRadioOptions3']:checked").val(),
+                    $("input[name='inlineRadioOptions4']:checked").val(),
+                    $("input[name='inlineRadioOptions5']:checked").val(),
+                    $("input[name='inlineRadioOptions6']:checked").val(),
+                    $("input[name='inlineRadioOptions7']:checked").val(),
+                    $("input[name='inlineRadioOptions8']:checked").val(),
+                    $("input[name='inlineRadioOptions9']:checked").val(),
+                    $("input[name='inlineRadioOptions10']:checked").val()
+                ]
+            };
 
-        // if (secondaryValidate()) {
-            alert(newUser.name + " has submitted their information. Their responses were: " + newUser.responses);
+            // if (secondaryValidate()) {
+                // alert(newUser.name + " has submitted their information. Their responses were: " + newUser.responses);
+                
+                $.post("/api/friends", newUser, function(data) {
+                    alert("Your data has been submitted");
+                    console.log(match);
+                    // $("#match-modal").modal("show");
+                });
 
-            $.post("/api/friends", newUser, function(data) {
-                alert("Your data has been submitted");
-
-                console.log(match);
-                // $("#match-modal").modal("show");
-            });
-
-            // friendCompare();
-
-        // } else {
-        //     alert("Please answer all survey questions before submitting.")
-        // }
-       
-
-    } else {
-        alert("Please fill the entire form before submitting.")
-    }
-
-  })
-  
-  </script>
-
-</body>
-
-</html>
+            // } else {
+            //     alert("Please answer all survey questions before submitting.")
+            // }
+           
+        } else {
+            alert("Please fill the entire form before submitting.")
+        }
+      })
+      
+      </script>
+    
+    </body>
+    
+    </html>
