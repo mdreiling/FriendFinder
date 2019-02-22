@@ -49,7 +49,6 @@ module.exports = function(app) {
 
         // Push match into res callback to send it back to survey to be read by modal.
         res.json(match);
-
     });
 
 };
